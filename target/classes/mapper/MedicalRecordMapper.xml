@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.study.ssmhis.dao.MedicalRecordDao">
+    <select id="getList" parameterType="com.study.ssmhis.model.MedicalRecord" resultType="com.study.ssmhis.model.MedicalRecord">
+        select * from medicalrecord
+        <where>
+            <if test="mrid!=0">
+            mrid=#{mrid},
+            </if>
+            <if test="patientname!=null and patientname!=''">
+                patientname=#{patientname},
+            </if>
+            <if test="doctorid!=0">
+                doctorid=#{doctorid},
+            </if>
+            <if test="doctorname!=0 and doctorname!=''">
+                doctorname=#{doctorname},
+            </if>
+
+        </where>
+    </select>
+
+    <update id="update" parameterType="MedicalRecord">
+        update medicalrecord
+        <set>
+            <if test="status!=null and status!=''">
+                status=#{status},
+            </if>
+
+        </set>
+        where mrid=#{mrid}
+    </update>
+
+    <insert id="insert" parameterType="com.study.ssmhis.model.MedicalRecord">
+        insert into medicalrecord(mrid,patientname,cc,nowhistory,nowmc,passhistory,allergy,physical,china,
+                                  onsetdate,clinicnumber,western,support,advice,notice,doctorid,doctorname,status)
+        values(#{mrid},#{patientname},#{cc},#{nowhistory},#{nowmc},#{passhistory},#{allergy},#{physical},
+                    #{china},#onsetdate},#{clinicnumber},#{western},#{support},#{advice},#{notice},#{doctorid},#{doctorname},#{status})
+
+    </insert>
+
+</mapper>

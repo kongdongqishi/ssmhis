@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.study.ssmhis.dao.illDao">
+    <select id="getList" parameterType="com.study.ssmhis.model.ill" resultType="ill">
+        select * from ill2
+    </select>
+    <select id="getUser" parameterType="com.study.ssmhis.model.User" resultType="User">
+        select * from user
+        <where>
+            <if test="id!=0 and id!=''">
+                id=#{id}
+            </if>
+            <if test="userName!=null and userName!=''">
+                and userName=#{userName}
+            </if>
+            <if test="password!=null and password!=''">
+                and password=#{password}
+            </if>
+        </where>
+    </select>
+
+    <insert id="insert" parameterType="com.study.ssmhis.model.ill">
+        insert into ill2(id,name,py,wb) values('${id}','${name}','${py}','${wb}')
+    </insert>
+
+    <delete id="delBatch" parameterType="String">
+        delete from ill2 where id in (#{ids})
+    </delete>
+
+</mapper>

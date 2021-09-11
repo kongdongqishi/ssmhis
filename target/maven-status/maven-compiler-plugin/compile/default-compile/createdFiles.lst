@@ -1,0 +1,5 @@
+com\study\ssmhis\controller\productController.class
+com\study\ssmhis\service\productService.class
+com\study\ssmhis\dao\productDao.class
+com\study\ssmhis\service\impl\productSerbiceImpl.class
+com\study\ssmhis\model\product.class

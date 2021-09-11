@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.study.ssmhis.dao.SchdDao">
+    <select id="getList" parameterType="com.study.ssmhis.model.Schd" resultType="Schd">
+        select * from doctorschdule
+        <where>
+            <if test="DoctorId!=0 ">
+                and DoctorId=#{DoctorId}
+            </if>
+            <if test="DepartmentId!=0">
+                and DepartmentId=#{DepartmentId}
+            </if>
+        </where>
+    </select>
+    <select id="byId" parameterType="int" resultType="Schd">
+        select * from doctorschdule where id=#{id}
+    </select>
+
+    <insert id="insert" parameterType="com.study.ssmhis.model.Schd">
+        insert into doctorschdule (Schedulingtime,DepartmentId,DoctorId,registrationId,Vaild,PeriodId,LimitNum,RemainingNum,OperateTime) values(#{Schedulingtime},#{DepartmentId},#{DoctorId},#{registrationId},#{Vaild},#{PeriodId},#{LimitNum},#{RemainingNum},#{OperateTime})
+    </insert>
+    <update id="update" parameterType="com.study.ssmhis.model.Schd">
+        update doctorschdule
+        <set>
+            Schedulingtime=#{Schedulingtime},
+            DepartmentId=#{DepartmentId},
+            DoctorId=#{DoctorId},
+            registrationId=#{registrationId},
+            Vaild=#{Vaild},
+            PeriodId=#{PeriodId},
+            LimitNum=#{LimitNum},
+            RemainingNum=#{RemainingNum},
+            OperateTime=#{OperateTime},
+        </set>
+        where id=#{id}
+    </update>
+
+    <delete id="delBatch" parameterType="String">
+        delete from doctorschdule where id in (#{ids})
+    </delete>
+
+
+
+
+
+    <!--<select id="all" resultType="User">
+        select * from user
+    </select>
+
+    <select id="getById" parameterType="int" resultType="User">
+        select * from user where id=#{id}
+    </select>-->
+</mapper>

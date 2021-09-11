@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.study.ssmhis.dao.UserDao">
+    <!--<select id="getList" parameterType="com.study.ssmhis.model.MedicalRecord" resultType="MedicalRecord">
+        select * from '病历'
+        <where>
+            <if test="mrid!=0">
+                id=#{id}
+            </if>
+            <if test="userName!=null and userName!=''">
+                and userName=#{userName}
+            </if>
+            <if test="password!=null and password!=''">
+                and password=#{password}
+            </if>
+        </where>
+    </select>-->
+    <select id="bymrid" parameterType="int" resultType="MedicalRecord">
+        select * from '病历' where mrid=#{mrid}
+    </select>
+    <insert id="insert" parameterType="com.study.ssmhis.model.MedicalRecord">
+        insert into '病历' (patientname,ischeck)values(#{patientname},#{ischeck})
+    </insert>
+    <update id="update" parameterType="com.study.ssmhis.model.MedicalRecord">
+        update '病历'
+        <set>
+            <if test="mrid!=null and mrid!=''">
+                mrid=#{userName},
+            </if>
+            <if test="patientname!=null and patientname!=''">
+                patientname=#{patientname},
+            </if>
+            <if test="cc!=null and cc!=''">
+                cc=#{cc},
+            </if>
+            <if test="phone!=null and phone!=''">
+                phone=#{phone},
+            </if>
+            <if test="remark!=null and remark!=''">
+                remark=#{remark},
+            </if>
+            <if test="sex!=null and sex!=''">
+                sex=#{sex},
+            </if>
+        </set>
+        where id=#{id}
+    </update>
+    <!--<select id="delete" parameterType="int" resultType="int">
+        delete from user
+        <where>
+            <if test="id!=0">
+                id=#{id}
+            </if>
+        </where>
+    </select>-->
+    <delete id="delete" parameterType="int" >
+        delete from user where id=#{id}
+    </delete>
+    <delete id="delBatch" parameterType="String">
+        delete from user where id in (${ids})
+    </delete>
+
+
+
+
+
+    <!--<select id="all" resultType="User">
+        select * from user
+    </select>
+
+    <select id="getById" parameterType="int" resultType="User">
+        select * from user where id=#{id}
+    </select>-->
+</mapper>

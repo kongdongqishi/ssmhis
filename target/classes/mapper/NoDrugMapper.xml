@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.study.ssmhis.dao.NoDrugDao">
+    <select id="getList" parameterType="com.study.ssmhis.model.NoDrug" resultType="NoDrug">
+        select * from nodrug
+    </select>
+
+    <select id="byId" parameterType="int" resultType="NoDrug">
+        select * from nodrug where id=#{id}
+    </select>
+
+    <insert id="insert" parameterType="com.study.ssmhis.model.NoDrug">
+        insert into nodrug (id,name,remark,cost,DepartmentId) values('${id}','${name}','${remark}','${cost}','${DepartmentId}')
+    </insert>
+    <update id="update" parameterType="com.study.ssmhis.model.NoDrug">
+        update nodrug
+        <set>
+            <!--<if test="userName!=null and userName!=''">
+                userName=#{userName},
+            </if>
+            <if test="password!=null and password!=''">
+                password=#{password},
+            </if>
+            <if test="email!=null and email!=''">
+                email=#{email},
+            </if>
+            <if test="phone!=null and phone!=''">
+                phone=#{phone},
+            </if>
+            <if test="remark!=null and remark!=''">
+                remark=#{remark},
+            </if>
+            <if test="sex!=null and sex!=''">
+                sex=#{sex},
+            </if>-->
+            name = #{name},
+            remark = #{remark},
+            cost = #{cost},
+            DepartmentId = #{DepartmentId},
+        </set>
+        where id = #{id}
+    </update>
+
+
+    <delete id="delBatch" parameterType="String">
+        delete from nodrug where id in (#{ids})
+    </delete>
+
+</mapper>
